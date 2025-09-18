@@ -160,7 +160,7 @@ end
 
 ## 📈 Workflow Overview
 
-This repository includes two scripts for generating and analyzing data from the Klausmeier model. For the variations we used in the different experiments slight adaptations are neccessary of the code to make it functional, but if needed, can be sent upon request.
+This repository includes two scripts for generating and analyzing data from the Extended klausmeier model with stochastic dynamical noise. For the variations we used in the different experiments slight adaptations are neccessary of the code to make it functional, but if needed, can be sent upon request. (You can just make different forloops with the different parametersettings that you are interested in.)
 
 ### 1. **Simulation & Analysis Script**
 **File:** `simulate_and_analyze_combined.m`  
@@ -173,12 +173,7 @@ It produces `.mat` files containing vegetation and water matrices (`u`, `v`), fi
 
 ### 2. **Publication Plotting Script**
 **File:** `plot_datasets_neat.m`  
-This script loads the saved results from the first script and generates:
-- Statistical summaries of eigenvalue curves
-- Density overlays and confidence ellipses
-- Annotated figures matching those presented in the paper
-
-It is designed to produce clean, interpretable visualizations with the extensive focus on the stability parameters found for the seperate datasets. These plots should be similar to the ones presented in the paper.
+This script loads the saved results from the previous script and plots it in a similar way to the original paper.
 
 ---
 
