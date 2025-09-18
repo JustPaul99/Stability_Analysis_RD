@@ -15,13 +15,13 @@ Codes created and based on the work....
 ## 📦 Repository Contents
 
 ```text
-📁 your-repo/
+📁 Stability_Analysis_RD/Codes
  ┣ 📄 analyze_data.m                       # Core analysis function for extracting stability metrics from simulation data
  ┣ 📄 simulate_Klausmeier.m                # Euler-based simulation of the Klausmeier model (with noise and spatial dynamics)
  ┣ 📄 simulate_Klausmeier_RK.m             # RK4-based simulation of the Klausmeier model (higher accuracy time integration)
  ┣ 📄 simulate_and_analyze_combined.m      # Main script that runs simulations and analyzes results; generates raw data and basic plots
- ┣ 📄 plot_datasets_neat.m                 # Publication-grade plotting script using saved results; produces annotated figures and LaTeX-ready summaries
- ┗ 📄 README.md                            # Project documentation and workflow guide
+ ┗ 📄 plot_datasets_neat.m                 # Publication-grade plotting script using saved results; produces annotated figures and LaTeX-ready summaries
+📄 README.md                               # Project documentation and workflow guide
 ```
 
 ---
