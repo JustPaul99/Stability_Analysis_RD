@@ -19,7 +19,7 @@ Codes created for the work....
  ┣ 📄 analyze_data.m                       # Core analysis function for extracting stability metrics from simulation data
  ┣ 📄 simulate_Klausmeier.m                # Euler-based simulation of the Klausmeier model (with noise and spatial dynamics)
  ┣ 📄 simulate_and_analyze_combined.m      # Main script that runs simulations and analyzes results; generates raw data and basic plots
- ┗ 📄 plot_datasets_neat.m                 # Publication-grade plotting script using saved results; produces annotated figures and LaTeX-ready summaries
+ ┗ 📄 plot_datasets_neat.m                 # plotting script to get similar plots to the paper.
 📄 README.md                               # Project documentation and workflow guide
 ```
 
