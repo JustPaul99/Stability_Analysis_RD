@@ -8,7 +8,7 @@ This project provides a MATLAB implementation for analyzing the **stability of s
 
 We provide the code for how we simulated the data, the code for how we analysed the data and the code that we used for the statistical analysis of the multiple experimental setups.
 
-Codes created for the work....
+Codes are created for the paper (*Insert url*).
 
 ---
 
