@@ -31,7 +31,9 @@ Codes created for the work....
 `simulate_Klausmeier.m` generates spatiotemporal data based on the Extended Klausmeier model as defined in the paper. This method uses an Euler-Mayurama scheme with three different types of noise (`White`, `Correlated`, or `Uniform`).
 
 ### 📎 Syntax
-
+```matlab
+[u, v] = simulate_Klausmeier(delta, h, m, pvec, t, tsteps, L, xsteps, noiseType, correlation_length, NoiseScale)
+```
 ### 📥 inputs
 
 | Parameter            | Description |
@@ -108,8 +110,7 @@ The function samples a subset of the full dataset based on user-defined time and
 
 ### 4. **Stability Analysis**
 - A system matrix is constructed as a function of spatial frequency `k`.
-- The dominant eigenvalue is computed across a range of `k` values.
-- If `max_eigenvalue > 0`, the system is unstable; otherwise, it is stable.
+- The dominant eigenmode `k_max` and its corresponding eigenvalue `max_eigenvalue` are calculated from this matrix.
 
 ---
 
@@ -158,7 +159,7 @@ end
 
 ## 📈 Workflow Overview
 
-This repository includes two scripts for creating multiple datasets from the Extended klausmeier model with stochastic dynamical noise that have been analyzed for stability. One specific experimental setup has been provided for the creating of the datasets for different noise situations. For other experimental setups, you can follow the values in Table 1 of the paper and make forloops around these values.
+This repository includes two scripts for creating multiple datasets from the Extended Klausmeier model that are then being analyzed for stability. One specific experimental setup has been provided for the creating of the datasets for different noise situations. For other experimental setups, you can follow the values in Table 1 of the paper and make different loops for these settings.
 
 ### 1. **Simulation & Analysis Script**
 **File:** `simulate_and_analyze_combined.m`  
