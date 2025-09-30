@@ -4,9 +4,9 @@
 
 ## 🧠 Purpose
 
-This project provides a MATLAB implementation for analyzing the **stability of spatiotemporal systems** using constrained least squares fitting and spectral analysis. It is designed to work with datasets that evolve over time and space, specifically reaction-diffusion systems, to help determine the stability of different Fourier modes. 
+This project provides a MATLAB implementation for analyzing the **stability of spatiotemporal systems** using constrained least squares fitting and spectral analysis to create dispersion relations. It is designed to work with datasets that evolve over time and space, and is developed specifically for reaction-diffusion systems. 
 
-We provide the code for how we simulated the data, the code for how we analysed the data and the codes that we used for the experiments upon multiple datasets under different settings.
+We provide the code for how we simulated the data, the code for how we analysed the data and the code that we used for the statistical analysis of the multiple experimental setups.
 
 Codes created for the work....
 
@@ -26,17 +26,13 @@ Codes created for the work....
 ---
 ## 🔍 Function: `Simulate_Klausmeier`
 
-## 🧬 Data Generation Methods used for the Extended-Klausmeier Model
+### 📌 Description
 
-Implemented in `simulate_Klausmeier.m`, this method uses an Euler-Mayurama scheme with three different types of noise (`White`, `Correlated`, or `Uniform`).
+`simulate_Klausmeier.m` generates spatiotemporal data based on the Extended Klausmeier model as defined in the paper. This method uses an Euler-Mayurama scheme with three different types of noise (`White`, `Correlated`, or `Uniform`).
 
----
+### 📎 Syntax
 
-## 📥 Inputs & 📤 Outputs
-
-### Simulation Functions
-
-Both `simulate_Klausmeier.m` and `simulate_Klausmeier_RK.m` generate spatiotemporal data based on the Klausmeier model. They accept the following inputs:
+### 📥 inputs
 
 | Parameter            | Description |
 |----------------------|-------------|
@@ -52,10 +48,7 @@ Both `simulate_Klausmeier.m` and `simulate_Klausmeier_RK.m` generate spatiotempo
 | `correlation_length` | Spatial correlation length for noise |
 | `NoiseScale`         | Scaling factor for noise strength |
 
-### Outputs
-
-Both functions return:
-
+### 📤 Outputs
 - `u`: Matrix of vegetation density over time and space
 - `v`: Matrix of water concentration over time and space
 
@@ -123,13 +116,32 @@ The function samples a subset of the full dataset based on user-defined time and
 ## 🧪 Example Usage
 
 ```matlab
-% Load or generate your data
-[u, v] = data
+%%optional data creation
+%Domain setup
+t = 1; L = 40;
+tsteps=10000;
+xsteps=400;
 
-% Define domain and sampling parameters
-t = 10; L = 5;
-tbegin = 1; tend = 100; tstepsize = 2;
-xbegin = 1; xend = 50; stepsize = 1;
+% Setup parameters for klausmeier
+delta=0.01; % Turing
+h=0.1;
+m=0.5;
+pbegin = 6; 
+pend = 6;
+pvec = pbegin + (pend - pbegin) * (0:dt:t) / t;
+
+%Noise properties
+correlation_length=0.1;
+noiseType='Correlated';
+NoiseScale=1; %Noise Strength
+
+% Load or generate your data
+[u, v] = simulate_Klausmeier(delta, h, m, pvec, t, tsteps, L, xsteps, noiseType, correlation_length, NoiseScale)
+%[u,v] = Your_data
+
+% Define domain and sampling parameters for analysis
+tbegin = 0; tend = tsteps; tstepsize = 1;
+xbegin = 0; xend = xsteps; stepsize = 1;
 
 % Run analysis
 [theta, conf, StabilityMatrix, eigenvalue_function, k_max, max_eigenvalue] = ...
@@ -146,12 +158,12 @@ end
 
 ## 📈 Workflow Overview
 
-This repository includes two scripts for generating and analyzing data from the Extended klausmeier model with stochastic dynamical noise. For the variations we used in the different experiments slight adaptations are neccessary of the code to make it functional, but if needed, can be sent upon request. (You can just make different forloops with the different parametersettings that you are interested in.)
+This repository includes two scripts for creating multiple datasets from the Extended klausmeier model with stochastic dynamical noise that have been analyzed for stability. One specific experimental setup has been provided for the creating of the datasets for different noise situations. For other experimental setups, you can follow the values in Table 1 of the paper and make forloops around these values.
 
 ### 1. **Simulation & Analysis Script**
 **File:** `simulate_and_analyze_combined.m`  
 This script combines the simulation (`simulate_Klausmeier.m`) and analysis (`analyze_data.m`) functions to:
-- Run multiple simulations across parameter ranges
+- Run multiple simulations across different experimentsettings
 - Extract fitted stability parameters from each run
 - Save raw data and basic plots for inspection
 
