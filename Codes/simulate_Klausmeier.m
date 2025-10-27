@@ -1,13 +1,6 @@
 function [u, v] = simulate_Klausmeier(delta, h, m, pvec, t, tsteps, L, xsteps, noiseType, correlation_length, NoiseScale)
-    %% --- Model Setup Examples (Uncomment to use specific scenarios) ---
-    % Parameters for homogeneous stability
-    % delta = 1/8; h = 1/5; m = 5; pbegin = 20; pend = 20;
-
-    % Stable Turing pattern with m < 1
-    % delta = 0.01; h = 0.1; m = 0.9; pbegin = 10; pend = 10;
-
-    % Stable tipping point with m < 1
-    % delta = 0.01; h = 0.8; m = 0.01; pbegin = 10; pend = 10;
+    %%Specific parameter scenarios for tipping and/or Turing can be found
+    %%in the paper in table 1
 
     %% --- Create spatial and temporal grids ---
     dt = t / (tsteps - 1);
@@ -25,19 +18,21 @@ function [u, v] = simulate_Klausmeier(delta, h, m, pvec, t, tsteps, L, xsteps, n
     v = ones(tsteps, xsteps) * vstar;
     epsilon = NoiseScale * sqrt(dt);  % Noise scaling factor
 
+    %spatial correlation filter for noise
+    if correlation_length>0
+    x= dx*(-xsteps:1:xsteps);
+    filter=1/(correlation_length*sqrt(pi))*exp(-x.^2/correlation_length^2);
+    end
+
     %% --- Time-stepping loop ---
     for i = 1:tsteps-1
         %% --- Generate noise based on type ---
         if strcmp(noiseType, 'Correlated')
-            x = -xsteps:1:xsteps;
-            filter = exp(-x.^2 / (correlation_length^2 / dx^2));
-            filter = filter / sqrt(sum(filter.^2));  % Normalize filter
-
             uncorrelated_noise_u = epsilon * randn(xsteps, 1);
             uncorrelated_noise_v = epsilon * randn(xsteps, 1);
 
-            Noise = conv(uncorrelated_noise_u, filter, 'same');
-            Noise2 = conv(uncorrelated_noise_v, filter, 'same');
+            Noise = dx*conv(uncorrelated_noise_u,filter, 'same');
+            Noise2 = dx*conv(uncorrelated_noise_v,filter, 'same');
 
         elseif strcmp(noiseType, 'White')
             Noise = epsilon * randn(xsteps, 1);
