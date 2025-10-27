@@ -19,7 +19,7 @@ for correlation_length = [0, 0.1, 0.2]
         % Loop over diffusion coefficients
         for delta = [0.01,0.5]
 
-            simuls = 10;  % Number of simulations
+            simuls = 100;  % Number of simulations, can make smaller for faster runs
 
             % Define wavenumber range for stability analysis
             if delta < 0.2
@@ -42,7 +42,7 @@ for correlation_length = [0, 0.1, 0.2]
             L = 40;              % Domain length
             xsteps = 400;        % Number of spatial steps
             t = 1;               % Total simulation time
-            scale = 5;         % Scaling factor for time resolution
+            scale = 100;         % Scaling factor for time resolution, above 5 should be enough in most cases to work (improves runtime dramatically)
             tsteps = floor(scale * t * xsteps^2 / L^2);  % Time steps based on CFL-like scaling
             dt = t / (tsteps - 1);
 
