@@ -19,7 +19,7 @@ for correlation_length = [0, 0.1, 0.2]
         % Loop over diffusion coefficients
         for delta = [0.01,0.5]
 
-            simuls = 100;  % Number of simulations, can make smaller for faster runs
+            simuls = 100;  % Number of simulations
 
             % Define wavenumber range for stability analysis
             if delta < 0.2
@@ -145,32 +145,8 @@ for correlation_length = [0, 0.1, 0.2]
         figure;
         hold on;
 
-        %% --- Plot theoretical and statistical curves ---
-        fplot(eigenvalue_function_real, [-ksize, ksize], 'k-', 'LineWidth', 1);
-        if time_change
-            fplot(eigenvalue_function_real_end, [-ksize, ksize], 'Color', [0.8500, 0.3250, 0.0980], 'LineWidth', 1);
-        end
-        plot(k1, meanValues, 'b', 'LineWidth', 2);
-        plot(k1, percentile95, 'r--', 'LineWidth', 1.5);
-        plot(k1, percentile5, 'g--', 'LineWidth', 1.5);
-        plot(k_max_real, max_eigenvalue_real, 'p', 'MarkerSize', 20, 'MarkerFaceColor', 'yellow');
-
-        %% Set consistent Y-limits after plotting
-        %You can set your own limits or let the limits be defined by your
-        %dispersion relation as is commented out below
-        xlim([-ksize, ksize]);
-        y_min=-4;
-        y_max=0.5;
-        %ymin = min([percentile5, percentile95, meanValues]);
-        %ymax = max([percentile5, percentile95, meanValues]);
-        %padding = 0.05 * (ymax - ymin);  % Small padding
-        %y_min=ymin-padding;
-        %y_max=ymin-padding;
-        ylim([y_min, y_max]);
-
-
         %% --- Visualize spread in (k_max, lambda_max) --f-
-        scatter(k_max_data, eigenvalue_data, 30, 'filled', 'MarkerFaceAlpha', 0.3);
+        scatter(k_max_data, eigenvalue_data, 30, 'filled','MarkerFaceColor', [0 0.4470 0.7410],'MarkerEdgeColor', 'none', 'MarkerFaceAlpha', 0.3);
 
         data = [k_max_data, eigenvalue_data];
         plotvariation = 3;
@@ -196,6 +172,30 @@ for correlation_length = [0, 0.1, 0.2]
             ellipsoid = V * sqrt(D) * circle + mu';
             plot(ellipsoid(1,:), ellipsoid(2,:), '-', 'Color', [1, 0.5, 0], 'LineWidth', 2);
         end
+
+        %% --- Plot theoretical and statistical curves ---
+        fplot(eigenvalue_function_real, [-ksize, ksize], 'k-', 'LineWidth', 1);
+        if time_change
+            fplot(eigenvalue_function_real_end, [-ksize, ksize], 'Color', [0.8500, 0.3250, 0.0980], 'LineWidth', 1);
+        end
+        plot(k1, meanValues, 'b', 'LineWidth', 2);
+        plot(k1, percentile95, 'r--', 'LineWidth', 1.5);
+        plot(k1, percentile5, 'g--', 'LineWidth', 1.5);
+
+        plot(k_max_real, max_eigenvalue_real, 'p', 'MarkerSize', 20, 'MarkerFaceColor', 'yellow');
+
+        %% Set consistent Y-limits after plotting
+        %You can set your own limits or let the limits be defined by your
+        %dispersion relation as is commented out below
+        xlim([-ksize, ksize]);
+        y_min=-4;
+        y_max=0.5;
+        %ymin = min([percentile5, percentile95, meanValues]);
+        %ymax = max([percentile5, percentile95, meanValues]);
+        %padding = 0.05 * (ymax - ymin);  % Small padding
+        %y_min=ymin-padding;
+        %y_max=ymin-padding;
+        ylim([y_min, y_max]);
 
 
          %% --- Density overlays ---
@@ -225,8 +225,7 @@ for correlation_length = [0, 0.1, 0.2]
                      'XColor', 'magenta', 'YColor', 'none');
         xlim(axTop, [0, 4]);
         xticks(axTop, 0:0.5:1);
-            
-            %% --- Return to primary Y-axis for labels and legend ---         
+                 
             
 %% --- Annotate fitted parameters (theta and stability metrics) ---
         theta_mean = mean(theta_data(:, [1, 2, 5, 6, 8]), 1);
