@@ -18,8 +18,7 @@ Codes are created for the paper (*Insert url*).
 📁 Stability_Analysis_RD/Codes
  ┣ 📄 analyze_data.m                       # Core analysis function for extracting stability metrics from simulation data
  ┣ 📄 simulate_Klausmeier.m                # Euler-based simulation of the Klausmeier model (with noise and spatial dynamics)
- ┣ 📄 simulate_and_analyze_combined.m      # Main script that runs simulations and analyzes results; generates raw data and basic plots
- ┗ 📄 plot_datasets_neat.m                 # plotting script to get similar plots to the paper.
+ ┗ 📄 simulate_and_analyze_combined.m      # Main script that runs simulations and analyzes results; generates raw data and basic plot
 📄 README.md                               # Project documentation and workflow guide
 ```
 
@@ -159,20 +158,16 @@ end
 
 ## 📈 Workflow Overview
 
-This repository includes two scripts for creating multiple datasets from the Extended Klausmeier model that are then being analyzed for stability. One specific experimental setup has been provided for the creating of the datasets for different noise situations. For other experimental setups, you can follow the values in Table 1 of the paper and make different loops for these settings.
+This repository includes a script for creating multiple datasets from the Extended Klausmeier model that are then being analyzed for stability. One specific experimental setup has been provided for the creating of the datasets for different noise situations. For other experimental setups, you can follow the values in Table 1 of the paper and make different loops for these settings.
 
-### 1. **Simulation & Analysis Script**
+### **Simulation & Analysis Script**
 **File:** `simulate_and_analyze_combined.m`  
 This script combines the simulation (`simulate_Klausmeier.m`) and analysis (`analyze_data.m`) functions to:
 - Run multiple simulations across different experimentsettings
 - Extract fitted stability parameters from each run
 - Save raw data and basic plots for inspection
 
-It produces `.mat` files containing vegetation and water matrices (`u`, `v`), fitted parameters (`theta_data`), and eigenvalue curves (`plot_data`) for downstream use. It also plots the first version of the plots presented in the paper.
-
-### 2. **Publication Plotting Script**
-**File:** `plot_datasets_neat.m`  
-This script loads the saved results from the previous script and plots it in a similar way to the original paper.
+It produces `.mat` files containing vegetation and water matrices (`u`, `v`), fitted parameters (`theta_data`), and eigenvalue curves (`plot_data`) for downstream use. It also plots the similar dispersion plots as the paper
 
 ---
 
