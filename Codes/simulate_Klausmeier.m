@@ -21,7 +21,8 @@ function [u, v] = simulate_Klausmeier(delta, h, m, pvec, t, tsteps, L, xsteps, n
     %spatial correlation filter for noise
     if correlation_length>0
     x= dx*(-xsteps:1:xsteps);
-    filter=1/(correlation_length*sqrt(pi))*exp(-x.^2/correlation_length^2);
+    filter=exp(-x.^2/correlation_length^2);
+    filter=filter/sqrt(sum(filter.^2));
     end
 
     %% --- Time-stepping loop ---
@@ -68,3 +69,4 @@ function [u, v] = simulate_Klausmeier(delta, h, m, pvec, t, tsteps, L, xsteps, n
     % figure();
     % mesh(T(xbegin:xend, 1:timesteps:end), X(xbegin:xend, 1:timesteps:end), real(transpose(v(1:timesteps:end, xbegin:xend))));
 end
+
