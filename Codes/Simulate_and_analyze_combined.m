@@ -14,7 +14,7 @@ for correlation_length = [0, 0.1, 0.2]
     end
 
     % Loop over noise amplitudes
-    for NoiseScale = [0.1,1,10]*sqrt(0.1003) %Fixed scaling of NoiseScales due to found error in normalisation in earlier code, scaling is presented to get same noisestrengths as in paper
+    for NoiseScale = [0.1,1,10]
 
         % Loop over diffusion coefficients
         for delta = [0.01,0.5]
@@ -287,3 +287,4 @@ for correlation_length = [0, 0.1, 0.2]
         end
     end
 end
+
